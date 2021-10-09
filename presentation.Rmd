@@ -1,0 +1,87 @@
+---
+title: "presentation"
+author: "Tong Sun"
+date: "10/7/2021"
+output:
+  html_document:
+    df_print: paged
+  revealjs::revealjs_presentation:
+    template: hw_temp_1.html
+    theme: solarized
+    highlight: pygments
+    css: reveal.css
+---
+
+```{r setup, include=FALSE, echo=FALSE, message=FALSE, warning=FALSE}
+library(png)
+library(dplyr)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+# Tidy data
+
+Three principles of tidy data:  
+ - Every column is a variable.  
+ - Every row is an observation.  
+ - Every cell is a single value.  
+
+<br>
+
+<h2>Messy data</h2>
+
+<div style="margin-left=20px">
+ - Column headers are values, not variable names.  
+ - Multiple variables are stored in one column.  
+ - Variables are stored in both rows and columns.  
+ - Multiple types of observational units are stored in the same table.  
+ - A single observational unit is stored in multiple tables.  
+
+</div>
+
+-----
+
+Example -- two subsets -- mean years in school in United States & China (men & women)
+```{r echo=FALSE}
+men<-tibble(read.csv("/Users/christinasun/Desktop/men.csv"))
+men
+women<-tibble(read.csv("/Users/christinasun/Desktop/women.csv"))
+women
+men1<-tibble(men) %>% filter(Country == "United States")
+men1
+men2<-tibble(men) %>% filter(Country == "China")
+men2
+a<-rbind(men1,men2)
+a
+```
+Visualization of the data
+
+mean years in school of men in United States & China
+
+![avatar](/Users/christinasun/Desktop/1.png)
+From plot 1, we can find the mean years in school of men all show an increasing trend both in United States and in China. The difference between these two countries is that in United States there is a curve upward trend, while in China there is a straight upward trend. And the mean of the data collected in United States is 12.16, while the mean in China is 8.28. The difference between these two countries is significant.
+-----
+mean years in school of women in United States & China
+
+![avatar](/Users/christinasun/Desktop/2.png)
+From plot 2, we can find that the average amount of time women spend in school shows a similar trend compared to men in both countries. The mean of the data from United States is 12.36, and from China is 7.74. From above two plots, we can find no matter for men and women, the mean years in school in United States are higher than that in China.
+-----
+mean years in school of men & women in United States 
+
+![avatar](/Users/christinasun/Desktop/3.png)
+From this plot, we calculate the difference between men and women in United States. We find that the mean of the data sets is totally different. For men in United States, it is 12.16; for women, it is 12.36. The mean of women is bigger than that of men.
+-----
+mean years in school of men & women in China
+
+![avatar](/Users/christinasun/Desktop/4.png)
+From the last plot, we do the same thing in China. But the mean of men is 8.28, which is bigger than that of women--7.74.
+```
+# read the R file wrangling_code.R
+```{r, echo=FALSE, message=FALSE, results='hide'}
+source(file = "/Users/christinasun/Desktop/MA 615/Assignment/ma615-assignment-2/ma615--assignment2--tong sun/wrangling_code.R")
+```
+
+# read the R file visualization_function.R
+```{r, echo=FALSE, message=FALSE, results='hide'}
+source(file = "/Users/christinasun/Desktop/MA 615/Assignment/ma615-assignment-2/ma615--assignment2--tong sun/visualization_function.R", echo = TRUE)
